@@ -27,7 +27,7 @@ urlpatterns = [
     path('post_form/', views.post_form),
     path('favorite_list/', views.favorite_list),
     path('accounts/', include('users.urls')),
-    path('accounts/', include('posts.urls'))
+    path('posts/', include('posts.urls'))
 
 
 ]
