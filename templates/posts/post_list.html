@@ -8,9 +8,10 @@
                 Последние публикации пользователей
             </p>
         </div>
-        <button class="border-0 bg-black  text-white h-10 flex items-center justify-center rounded-lg px-4">Написать пост</button>
+        {%if user.is_authenticated %}
+        <button class="border-0 bg-black  text-white h-10 flex items-center justify-center rounded-lg px-4">Написать пост</button>{% endif %}
         </div>
-
+        
         <div class="grid grid-cols-2 gap-4 mt-4">
         <div data-label="Пост" class="flex flex-col gap-4 p-3 rounded-lg border border-zinc-300 bg-white">
             <div class = 'flex items-center justify-between'>
@@ -32,4 +33,5 @@
 
 
         </div>
+        {%include "posts/includes/post_cards.html" %}
 {% endblock %}

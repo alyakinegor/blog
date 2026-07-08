@@ -39,7 +39,7 @@ class RegisterView(View):
         if not form.is_valid():
             return render(request, self.template_name, {
                 'username_value': request.POST.get('username', '').strip(),
-                'email_value': request.POST.get('email', '').strip(),
+                'email_value': request.POST.get('email', '').strip(), 
                 'errors': form.errors,
                 'non_field_errors': form.non_field_errors})
 

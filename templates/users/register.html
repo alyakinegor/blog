@@ -19,12 +19,12 @@
         </div>
         <div class="mt-4">
             <label for="password" class="block text-sm text-zinc-500">Пароль</label>
-            <input placeholder="Пароль" id="password" name="password" type="password" class="w-full ps-4 py-2 border border-zinc-300 text-base rounded-lg"/>
+            <input placeholder="Пароль" id="password" name="password1" type="password" class="w-full ps-4 py-2 border border-zinc-300 text-base rounded-lg"/>
             {{errors.password2}}
         </div>
         <div class="mt-4">
             <label for="r_password" class="block text-sm text-zinc-500">Повторите пароль</label>
-            <input placeholder="Повторите пароль" id="r_password" name="r_password" type="password" class="w-full ps-4 py-2 border border-zinc-300 text-base rounded-lg"/>
+            <input placeholder="Повторите пароль" id="r_password" name="password2" type="password" class="w-full ps-4 py-2 border border-zinc-300 text-base rounded-lg"/>
         </div>
         <button type='submit' class="flex items-center justify-center h-11 px-6 bg-black text-white text-base font-medium rounded-lg">Создать аккаунт</button>
         <p class="mt-5 text-sm text-slate-600 text-center">Уже есть аккаунт? <a href="{% url 'login' %}" class="text-blue-600">Войти</a></p>
