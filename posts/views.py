@@ -38,7 +38,7 @@ class PostDetailView(DetailView):
     model = Post
     template_name = 'posts/post_detail.html'
     
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return redirect('login')
         
@@ -46,7 +46,7 @@ class PostDetailView(DetailView):
         comment_text = request.POST.get('text', '').strip()
 
         if comment_text:
-            Comment.object.create(
+            Comment.objects.create(
                 post=self.object,
                 author=request.user,
                 text=comment_text
@@ -68,7 +68,7 @@ class PostCreateView(LoginRequiredMixin, View):
 
     def post(self, request):
         data, errors = validate_post_data(request)
-
+        print(data, errors)
         if errors:
             return render(
                 request, self.template_name, {'title_value': data['title'], 'text_value': data['text'], 'errors': errors}

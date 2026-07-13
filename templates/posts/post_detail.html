@@ -3,28 +3,69 @@
 {% block content %}
         <div class="text-base uppercase font-medium text-blue-500">Публикация</div>
         <div class="mt-4">
-            <h1 class="text-2xl font-bold">Lorem ipsum dolor, sit amet</h1>
+            <h1 class="text-2xl font-bold">{{post.title}}</h1>
 
             <div class="mt-1">
-                Автор: <span class="font-semibold">пользователь</span> 24.06.2026 19:21
+                Автор: <span class="font-semibold">{{post.author.username}}</span> {{post.created_at}}
             </div>
 
-            <p class="text-base text-zinc-500 mt-2">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium, repellendus.</p>
+            <p class="text-base text-zinc-500 mt-2">{{post.text}}</p>
 
+        </div>
+
+        <div>
+            {%if user.is_authenticated%}
+                <form method="post" action="{% url 'toggle_favorite' post.pk %}">
+                    {%csrf_token %}
+
+                    {% if user in post.favorites.all %}
+                        <button type="submit">Удалить из избранного</button>
+                    {% else %}
+                        <button type="submit">Добавить в избранное</button>
+                    {% endif %}
+                </form>
+            {%endif%}
+
+            {%if user == post.author %}
+                <div>
+                    <a href="{% url 'post_update' post.pk %}">Редактировать</a>
+                    <a href="{%url 'post_delete' post.pk %}">Удалить</a>
+                </div>
+            {%endif%}
         </div>
 
         <div class="mt-4">
             <h2 class="text-lg font-semibold">Комментарии</h2>
-            <div class="text-sm bg-whity rounded-lg py-2 px-4 my-2 bg-white">
-                <a href="" class="text-blue-500 hover:underline">Войдите</a>, что бы оставлять комментарии
+            {%if user.is_authenticated%}
+                <form method="post">
+                    {%csrf_token%}
+                    <label>Комментарий</label>
+                    <textarea id="comment-text" name="text" required {{comment_text }}></textarea>
+                    {%if comment_error %}
+                        <p class="text-red-500 text-sm mt-1">{{ comment_error }}</p> 
+                    {%endif %}
+                    <button type="submit">Добавить комментарий</button>
+                </form>
+
+            {%else%}
+                <div class="text-sm bg-whity rounded-lg py-2 px-4 my-2 bg-white">
+                    <a href="" class="text-blue-500 hover:underline">Войдите</a>, что бы оставлять комментарии
+                </div>
+            {%endif%}
+
+            <div class="mt-4 flex flex-col gap-3">
+                {%for comment in post.comments.all %}
+                <div>
+                    <p class="text-sm text-zinc-800">
+                        <span class="font-semibold text-black">{{comment.author.username }}</span>
+                        {{ comment.author.created_at }}
+                    </p>
+                    <p class="text-xs mt-0.5">{{ comment.text}}</p>
+                </div>
+                {%endfor%}
+
             </div>
-            <div>
-                <p class="text-sm text-zinc-800">
-                    <span class="font-semibold text-black">Пользователь</span>
-                    24.06.2026 19:21
-                </p>
-                <p class="text-xs mt-0.5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, consectetur!</p>
-            </div>
+            
         </div>
 
 {% endblock %}

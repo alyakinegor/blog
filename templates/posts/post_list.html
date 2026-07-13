@@ -9,7 +9,8 @@
             </p>
         </div>
         {%if user.is_authenticated %}
-        <button class="border-0 bg-black  text-white h-10 flex items-center justify-center rounded-lg px-4">Написать пост</button>{% endif %}
+            <a href="{%url 'post_create' %}" class="border-0 bg-black  text-white h-10 flex items-center justify-center rounded-lg px-4">Написать пост</a>
+        {% endif %}
         </div>
         
         <div class="grid grid-cols-2 gap-4 mt-4">
