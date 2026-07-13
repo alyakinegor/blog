@@ -23,7 +23,7 @@ class LoginView(View):
         
         login(request, form.get_user())
         messages.success(request, 'Вход выполнен.')
-        return redirect('/')
+        return redirect('/posts')
 
 
 class RegisterView(View):
@@ -47,6 +47,6 @@ class RegisterView(View):
 
         login(request, user)
         messages.success(request, 'Регистрация выполнена.')
-        return redirect('/')
+        return redirect('/posts')
 
 # Create your views here.
